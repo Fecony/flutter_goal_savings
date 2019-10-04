@@ -16,53 +16,84 @@ class _InitialScreenState extends State<InitialScreen> {
         value: SystemUiOverlayStyle.dark,
         child: SafeArea(
           child: Container(
-            decoration: BoxDecoration(color: generalWhiteColor),
+            color: generalWhiteColor,
             child: Column(
               children: <Widget>[
-                Align(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      child: FlatButton(
-                        onPressed: () => print('Settings'),
-                        child: Icon(
-                          Icons.more_horiz,
-                          color: darkGrayColor,
-                        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    FlatButton(
+                      onPressed: () => print('Settings'),
+                      child: Icon(
+                        Icons.more_horiz,
+                        color: darkGrayColor,
                       ),
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
                     ),
-                  ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Column(
                     children: <Widget>[
-                      Stack(
+                      Column(
                         children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(color: Colors.red),
-                            height: MediaQuery.of(context).size.height * .8,
+                          SizedBox(
+                            height: 157,
                           ),
-                          Row(
-                            children: <Widget>[
-                              // Text(
-                              //   'Click '.toUpperCase(),
-                              //   style: welcomeTextStyle,
-                              // ),
-                              // Text(
-                              //   'ADD NEW ',
-                              //   style: welcomeTextStyle.copyWith(
-                              //     color: primaryBlueColor,
-                              //   ),
-                              // ),
-                              // Text(
-                              //   'to start saving money and Reach'.toUpperCase(),
-                              //   style: welcomeTextStyle,
-                              // )
-                            ],
+                          RichText(
+                            text: TextSpan(
+                              style: welcomeTextStyle,
+                              children: <TextSpan>[
+                                TextSpan(text: 'CLICK '),
+                                TextSpan(
+                                  text: 'ADD NEW ',
+                                  style: welcomeTextStyle.copyWith(
+                                    color: primaryBlueColor,
+                                  ),
+                                ),
+                                TextSpan(
+                                    text: 'TO START SAVING MONEY AND REACH '),
+                                TextSpan(
+                                  text: 'YOUR ',
+                                  style: welcomeTextStyle.copyWith(
+                                    color: pinkTriangleColor,
+                                  ),
+                                ),
+                                TextSpan(text: 'GOALS'),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 372,
+                          ),
+                          RaisedButton(
+                            color: mainDarkGrayColor,
+                            onPressed: () => print('welcome add new'),
+                            padding: EdgeInsets.all(25.0),
+                            child: Row(
+                              // Replace with a Row for horizontal icon + text
+                              children: <Widget>[
+                                Text(
+                                  "ADD NEW",
+                                  style: addNewLightTextStyle,
+                                ),
+                                SizedBox(
+                                  width: 190.0,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: generalWhiteColor,
+                                ),
+                              ],
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(90.0),
+                            ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 )
