@@ -24,6 +24,18 @@ class _InitialScreenState extends State<InitialScreen> {
                 children: <Widget>[
                   Stack(
                     children: <Widget>[
+                      Positioned(
+                        left: MediaQuery.of(context).size.width - 80,
+                        top: -35,
+                        child: RotatedBox(
+                          quarterTurns: 3,
+                          child: DrawTriangle(
+                            size: 120,
+                            color: lightGrayColor,
+                            radius: 1,
+                          ),
+                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -79,7 +91,6 @@ class _InitialScreenState extends State<InitialScreen> {
                           ],
                         ),
                       ),
-                      DrawTriangle(),
                     ],
                   ),
                 ],
@@ -93,27 +104,33 @@ class _InitialScreenState extends State<InitialScreen> {
 }
 
 class DrawTriangle extends StatelessWidget {
+  final Color color;
+  final double radius;
+  final double size;
+
+  DrawTriangle({this.color, this.radius, this.size});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: Colors.grey), // for testing
-      child: CustomPaint(
-        painter: TrianglePainter(),
-        size: Size(200, 200),
-      ),
+    return CustomPaint(
+      painter: TrianglePainter(color, radius),
+      size: Size(size, size),
     );
   }
 }
 
-// this shit is working now, +/- as expected
 class TrianglePainter extends CustomPainter {
+  final Color color;
+  final double radius;
+
+  TrianglePainter(this.color, this.radius);
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = pinkTriangleColor
+      ..color = color.withOpacity(0.45)
       ..isAntiAlias = true
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 8;
+      ..style = PaintingStyle.fill;
 
     final double offsetToCenter = 15.0;
 
@@ -138,9 +155,9 @@ class TrianglePainter extends CustomPainter {
 
     Path path = Path()
       ..moveTo(dotAB.dx, dotAB.dy)
-      ..conicTo(pointB.dx - 10, pointB.dy, dotBC.dx, dotBC.dy, 2)
-      ..conicTo(pointC.dx + 10, pointC.dy, dotCA.dx, dotCA.dy, 2)
-      ..conicTo(pointA.dx, pointA.dy + 10, dotAB.dx, dotAB.dy, 2);
+      ..conicTo(pointB.dx - 10, pointB.dy, dotBC.dx, dotBC.dy, radius)
+      ..conicTo(pointC.dx + 10, pointC.dy, dotCA.dx, dotCA.dy, radius)
+      ..conicTo(pointA.dx, pointA.dy + 10, dotAB.dx, dotAB.dy, radius);
 
     canvas.drawPath(path, paint);
   }
