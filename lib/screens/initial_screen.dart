@@ -38,43 +38,38 @@ class _InitialScreenState extends State<InitialScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Column(
                     children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 157,
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              style: welcomeTextStyle,
-                              children: <TextSpan>[
-                                TextSpan(text: 'CLICK '),
-                                TextSpan(
-                                  text: 'ADD NEW ',
-                                  style: welcomeTextStyle.copyWith(
-                                    color: primaryBlueColor,
-                                  ),
-                                ),
-                                TextSpan(
-                                    text: 'TO START SAVING MONEY AND REACH '),
-                                TextSpan(
-                                  text: 'YOUR ',
-                                  style: welcomeTextStyle.copyWith(
-                                    color: pinkTriangleColor,
-                                  ),
-                                ),
-                                TextSpan(text: 'GOALS'),
-                              ],
+                      SizedBox(
+                        height: 157,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          style: welcomeTextStyle,
+                          children: <TextSpan>[
+                            TextSpan(text: 'CLICK '),
+                            TextSpan(
+                              text: 'ADD NEW ',
+                              style: welcomeTextStyle.copyWith(
+                                color: primaryBlueColor,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 372,
-                          ),
-                          BlackButton(
-                            label: "ADD NEW",
-                            width: 190.0,
-                            onPressed: () => print('welcome add new'),
-                          ),
-                        ],
+                            TextSpan(text: 'TO START SAVING MONEY AND REACH '),
+                            TextSpan(
+                              text: 'YOUR ',
+                              style: welcomeTextStyle.copyWith(
+                                color: pinkTriangleColor,
+                              ),
+                            ),
+                            TextSpan(text: 'GOALS'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 372,
+                      ),
+                      BlackButton(
+                        label: "ADD NEW",
+                        width: 190.0,
+                        onPressed: () => print('welcome add new'),
                       ),
                     ],
                   ),
