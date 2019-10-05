@@ -79,7 +79,7 @@ class _InitialScreenState extends State<InitialScreen> {
                           ],
                         ),
                       ),
-                      // DrawTriangle(),
+                      DrawTriangle(),
                     ],
                   ),
                 ],
@@ -105,22 +105,42 @@ class DrawTriangle extends StatelessWidget {
   }
 }
 
-// this shit is not going to work
+// this shit is working now, +/- as expected
 class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = pinkTriangleColor
       ..isAntiAlias = true
-      ..style = PaintingStyle.fill;
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8;
+
+    final double offsetToCenter = 15.0;
+
+    // Triangle dots
+    final Offset pointA = Offset(size.width / 2, -offsetToCenter);
+    final Offset pointB = Offset(0, size.height - offsetToCenter);
+    final Offset pointC = Offset(size.width, size.height - offsetToCenter);
+
+    // Distance between 2 dots
+    final Offset dotAB = Offset(
+      (pointA.dx + pointB.dx) / 2,
+      (pointA.dy + pointB.dy) / 2,
+    );
+    final Offset dotBC = Offset(
+      (pointB.dx + pointC.dx) / 2,
+      (pointB.dy + pointC.dy) / 2,
+    );
+    final Offset dotCA = Offset(
+      (pointC.dx + pointA.dx) / 2,
+      (pointC.dy + pointA.dy) / 2,
+    );
 
     Path path = Path()
-      ..moveTo(size.width / 2, 0)
-      ..conicTo(0, size.height, size.width / 2, size.height, 5)
-      ..conicTo(size.width, size.height, size.width / 2, size.height / 2, 5);
-
-    // ..lineTo(size.width, size.height)
-    // ..conicTo(size.width, size.height, size.width, size.height, 1);
+      ..moveTo(dotAB.dx, dotAB.dy)
+      ..conicTo(pointB.dx - 10, pointB.dy, dotBC.dx, dotBC.dy, 2)
+      ..conicTo(pointC.dx + 10, pointC.dy, dotCA.dx, dotCA.dy, 2)
+      ..conicTo(pointA.dx, pointA.dy + 10, dotAB.dx, dotAB.dy, 2);
 
     canvas.drawPath(path, paint);
   }
