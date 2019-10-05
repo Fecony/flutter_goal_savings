@@ -24,7 +24,7 @@ class _InitialScreenState extends State<InitialScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     FlatButton(
-                      onPressed: () => print('Settings'),
+                      onPressed: () => print('settings'),
                       child: Icon(
                         Icons.more_horiz,
                         color: darkGrayColor,
@@ -35,7 +35,7 @@ class _InitialScreenState extends State<InitialScreen> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
                   child: Column(
                     children: <Widget>[
                       SizedBox(
