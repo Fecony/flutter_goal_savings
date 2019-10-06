@@ -3,11 +3,9 @@ import 'package:flutter_goal_savings/styleguide/colors.dart';
 import 'package:flutter_goal_savings/styleguide/text_styles.dart';
 
 class BlackButton extends StatelessWidget {
-  BlackButton({this.label, this.width, this.onPressed});
+  BlackButton({this.label, this.onPressed});
 
   final String label;
-
-  final double width;
 
   final VoidCallback onPressed;
 
@@ -23,9 +21,7 @@ class BlackButton extends StatelessWidget {
             label ?? 'Default',
             style: addNewLightTextStyle,
           ),
-          SizedBox(
-            width: width ?? 10.0,
-          ),
+          Spacer(),
           Icon(
             Icons.arrow_forward_ios,
             color: generalWhiteColor,
