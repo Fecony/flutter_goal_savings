@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_goal_savings/screens/initial_screen.dart';
+// import 'package:flutter_goal_savings/screens/settings_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Goal Savings App',
       theme: ThemeData(fontFamily: 'Montserrat'),
       home: InitialScreen(),
+      // home: SettingsScreen(),
     );
   }
 }
