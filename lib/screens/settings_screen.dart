@@ -26,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
         child: SafeArea(
           child: Container(
             color: generalWhiteColor,
-            margin: new EdgeInsets.symmetric(horizontal: 40.0),
+            margin: EdgeInsets.symmetric(horizontal: 40.0),
             constraints: BoxConstraints(
               maxHeight: 210,
             ),

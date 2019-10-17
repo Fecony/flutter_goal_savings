@@ -1,9 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_goal_savings/styleguide/colors.dart';
 import 'package:flutter_goal_savings/styleguide/text_styles.dart';
 import 'package:flutter_goal_savings/widgets/black_btn.dart';
-import 'package:flutter_goal_savings/widgets/rounded_triangle.dart';
 
 class InitialScreen extends StatefulWidget {
   @override
@@ -20,6 +18,8 @@ class _InitialScreenState extends State<InitialScreen> {
         elevation: 0,
         actions: <Widget>[
           IconButton(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
             icon: Icon(Icons.more_horiz, color: darkGrayColor),
             onPressed: () => print('settings'),
           ),
