@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_goal_savings/styleguide/colors.dart';
 
 class DrawTriangle extends StatelessWidget {
-  final Color color;
-  final double strength;
-  final double size;
+  final Color color = pinkTriangleColor;
+  final double strength = 2;
+  final double size = 250;
 
-  DrawTriangle({this.color, this.strength, this.size});
+  // DrawTriangle({this.color, this.strength, this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -26,108 +26,55 @@ class TrianglePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Offset centerOffset = Offset(size.width / 2, size.height / 2);
-    double distance = 1.2;
-
-    Paint painty = Paint()
-      ..color = pinkTriangleColor
-      ..isAntiAlias = true
-      ..strokeWidth = 5.0
-      ..style = PaintingStyle.stroke;
-
     Paint paint = Paint()
       ..color = pinkTriangleColor
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 12.0
-      ..style = PaintingStyle.fill;
+      ..style = PaintingStyle.stroke;
 
-    Paint paint2 = Paint()
-      ..color = orangeTriangleColor
+    Paint addDotPaint = Paint()
+      ..color = cyanTriangleColor
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 12.0
-      ..style = PaintingStyle.fill;
-
-    Paint paint3 = Paint()
-      ..color = Colors.teal
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 12.0
-      ..style = PaintingStyle.fill;
-
-    Paint paint4 = Paint()
-      ..color = Colors.blue
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 8.0
-      ..style = PaintingStyle.fill;
-
-    Paint linePaint = Paint()
-      ..color = Colors.lightGreen
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 5.0
-      ..style = PaintingStyle.fill;
+      ..strokeWidth = 12.0;
 
     // Triangle dots
-    Offset pointA = Offset(size.width / 2, 0);
-    Offset pointB = Offset(0, size.height);
-    Offset pointC = Offset(size.width, size.height);
+    Offset a = Offset(size.width / 2, 0);
+    Offset b = Offset(0, size.height);
+    Offset c = Offset(size.width, size.height);
 
-    // Midpoint between 2 dots
-    Offset dotAB =
-        Offset((pointA.dx + pointB.dx) / 2, (pointA.dy + pointB.dy) / 2);
-    Offset dotBC =
-        Offset((pointB.dx + pointC.dx) / 2, (pointB.dy + pointC.dy) / 2);
-    Offset dotCA =
-        Offset((pointC.dx + pointA.dx) / 2, (pointC.dy + pointA.dy) / 2);
+    double dist = 150.0;
 
-    Offset leftDOT = Offset(
-      pointB.dx + centerOffset.dx / distance,
-      pointB.dy - centerOffset.dy / distance,
-    );
-    Offset middleDOT = Offset(
-      (pointA.dx + centerOffset.dx) / 2,
-      (pointA.dy + centerOffset.dy) / distance,
-    );
-    Offset rightDOT = Offset(
-      pointC.dx - centerOffset.dx / distance,
-      pointC.dy - centerOffset.dy / distance,
-    );
+    if (dist >= size.height / 2) {
+      canvas.drawCircle(Offset(size.width / 2, size.height / 2), 80, paint);
+    } else {
+      Offset a1 = Offset(a.dx - dist / 2, a.dy + dist);
+      Offset a2 = Offset(a.dx + dist / 2, a.dy + dist);
 
-    // Offset oneThirdAB = Offset(
-    //   pointB.dx + pointA.dx / 2,
-    //   pointB.dy - pointA.dy / 40,
-    // );
+      Offset b1 = Offset(b.dx + dist / 2, b.dy - dist);
+      Offset b2 = Offset(b.dx + dist, b.dy);
 
-    // Path path = Path()
-    //   ..moveTo(dotAB.dx, dotAB.dy)
-    //   ..conicTo(
-    //       leftDOT.dx - dist, leftDOT.dy + dist, dotBC.dx, dotBC.dy, distance)
-    //   ..conicTo(
-    //       rightDOT.dx + dist, rightDOT.dy + dist, dotCA.dx, dotCA.dy, distance)
-    //   ..conicTo(
-    //       middleDOT.dx, middleDOT.dy - dist, dotAB.dx, dotAB.dy, distance);
+      Offset c1 = Offset(c.dx - dist, c.dy);
+      Offset c2 = Offset(c.dx - dist / 2, c.dy - dist);
+
+      Path path = Path()
+        ..moveTo(a1.dx, a1.dy)
+        ..lineTo(b1.dx, b1.dy)
+        ..quadraticBezierTo(b.dx, b.dy, b2.dx, b2.dy)
+        ..lineTo(c1.dx, c1.dy)
+        ..quadraticBezierTo(c.dx, c.dy, c2.dx, c2.dy)
+        ..lineTo(a2.dx, a2.dy)
+        ..quadraticBezierTo(a.dx, a.dy, a1.dx, a1.dy);
+      canvas.drawPath(path, paint);
+      canvas.drawPoints(
+        PointMode.points,
+        [a1, b1, b2, c1, c2, a2],
+        addDotPaint,
+      );
+    }
 
     // canvas.drawPath(path, paint);
 
-    // canvas.drawLine(middleDOT, centerOffset, linePaint);
-    // canvas.drawLine(
-    //   leftDOT,
-    //   centerOffset,
-    //   Paint()
-    //     ..color = Colors.cyan
-    //     ..strokeWidth = 5.0,
-    // );
-    // canvas.drawLine(
-    //   rightDOT,
-    //   centerOffset,
-    //   Paint()
-    //     ..color = Colors.orange
-    //     ..strokeWidth = 5.0,
-    // );
-
-    // canvas.drawCircle(centerOffset, 5, paint);
-    // canvas.drawPoints(PointMode.points, [oneThirdAB], paint4);
-    canvas.drawPoints(PointMode.points, [pointA, pointB, pointC], paint);
-    canvas.drawPoints(PointMode.points, [dotAB, dotBC, dotCA], paint2);
-    // canvas.drawPoints(PointMode.points, [leftDOT, rightDOT, middleDOT], paint3);
+    // canvas.drawPoints(PointMode.points, [a, b, c], paint);
   }
 
   @override
